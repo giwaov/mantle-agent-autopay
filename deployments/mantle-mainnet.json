@@ -1,0 +1,10 @@
+{
+  "network": "Mantle Mainnet",
+  "chainId": 5000,
+  "rpcUrl": "https://rpc.mantle.xyz",
+  "explorer": "https://mantlescan.xyz",
+  "deployer": "0x28abA2DFcf42eAdfEe60CeBFA650aC7184652424",
+  "contract": "0xC659381Db77138942D43F8C6f2814Fb0770eAc57",
+  "txHash": "0x2d5ef10af1313f389250b04f8e3d26d5ff9edeb8b150c7b0c44b99e1d5948e95",
+  "deployedAt": "2026-06-13"
+}

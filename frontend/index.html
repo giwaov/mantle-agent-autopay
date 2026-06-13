@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mantle Agent Autopay</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <h1>Mantle Agent Autopay</h1>
+          <p>Recurring and milestone payments for AI agents on Mantle mainnet.</p>
+        </div>
+        <div class="wallet-panel">
+          <span id="networkBadge" class="badge">Wallet disconnected</span>
+          <button id="connectWallet" type="button">Connect Wallet</button>
+        </div>
+      </header>
+
+      <section class="status-grid" aria-label="Runtime status">
+        <div class="metric">
+          <span>Contract</span>
+          <strong id="contractMetric">Not set</strong>
+        </div>
+        <div class="metric">
+          <span>Wallet</span>
+          <strong id="walletMetric">Disconnected</strong>
+        </div>
+        <div class="metric">
+          <span>Mode</span>
+          <strong>Mainnet MNT</strong>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <aside class="sidebar">
+          <label for="contractAddress">Contract address</label>
+          <input id="contractAddress" autocomplete="off" spellcheck="false" placeholder="0x...">
+          <button id="saveContract" type="button">Save Address</button>
+
+          <nav class="tabs" aria-label="Autopay tools">
+            <button class="tab active" data-tab="schedule" type="button">Schedule</button>
+            <button class="tab" data-tab="milestone" type="button">Milestone</button>
+            <button class="tab" data-tab="operate" type="button">Operate</button>
+            <button class="tab" data-tab="inspect" type="button">Inspect</button>
+          </nav>
+        </aside>
+
+        <section class="panel active" id="schedule">
+          <div class="panel-head">
+            <h2>Create Schedule</h2>
+            <span>Fund recurring MNT payments an agent can claim over time.</span>
+          </div>
+          <form id="scheduleForm" class="form-grid">
+            <label>Agent address<input name="agent" placeholder="0x..." required></label>
+            <label>Amount per period<input name="amount" inputmode="decimal" placeholder="1.0" required></label>
+            <label>Period days<input name="periodDays" inputmode="numeric" value="7" required></label>
+            <label>Payments<input name="payments" inputmode="numeric" value="4" required></label>
+            <label>Fund now<input name="fund" inputmode="decimal" placeholder="Defaults to full schedule"></label>
+            <label>Metadata URI<input name="metadataURI" placeholder="ipfs://... or https://..."></label>
+            <button class="primary" type="submit">Create Schedule</button>
+          </form>
+        </section>
+
+        <section class="panel" id="milestone">
+          <div class="panel-head">
+            <h2>Create Milestone</h2>
+            <span>Escrow one payment and release it after completed agent work.</span>
+          </div>
+          <form id="milestoneForm" class="form-grid">
+            <label>Agent address<input name="agent" placeholder="0x..." required></label>
+            <label>Amount<input name="amount" inputmode="decimal" placeholder="5.0" required></label>
+            <label>Work hash or title<input name="work" placeholder="June treasury report" required></label>
+            <label>Metadata URI<input name="metadataURI" placeholder="ipfs://... or https://..."></label>
+            <button class="primary" type="submit">Create Milestone</button>
+          </form>
+        </section>
+
+        <section class="panel" id="operate">
+          <div class="panel-head">
+            <h2>Operate Payments</h2>
+            <span>Claim due schedules, cancel unused funds, or release milestones.</span>
+          </div>
+          <div class="action-grid">
+            <form id="claimForm" class="mini-form">
+              <label>Schedule ID<input name="scheduleId" inputmode="numeric" placeholder="1" required></label>
+              <button type="submit">Claim Due</button>
+            </form>
+            <form id="cancelScheduleForm" class="mini-form">
+              <label>Schedule ID<input name="scheduleId" inputmode="numeric" placeholder="1" required></label>
+              <button type="submit">Cancel Schedule</button>
+            </form>
+            <form id="releaseMilestoneForm" class="mini-form">
+              <label>Milestone ID<input name="milestoneId" inputmode="numeric" placeholder="1" required></label>
+              <button type="submit">Release Milestone</button>
+            </form>
+            <form id="cancelMilestoneForm" class="mini-form">
+              <label>Milestone ID<input name="milestoneId" inputmode="numeric" placeholder="1" required></label>
+              <button type="submit">Cancel Milestone</button>
+            </form>
+          </div>
+        </section>
+
+        <section class="panel" id="inspect">
+          <div class="panel-head">
+            <h2>Inspect Schedule</h2>
+            <span>Read claimable amount, remaining payments, and timing from mainnet.</span>
+          </div>
+          <form id="inspectForm" class="mini-form wide">
+            <label>Schedule ID<input name="scheduleId" inputmode="numeric" placeholder="1" required></label>
+            <button type="submit">Load Status</button>
+          </form>
+          <div id="scheduleReadout" class="readout"></div>
+        </section>
+      </section>
+
+      <section class="console">
+        <div class="console-head">
+          <h2>Activity</h2>
+          <button id="clearLog" type="button">Clear</button>
+        </div>
+        <pre id="logOutput">Ready.</pre>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.16.0/dist/ethers.umd.min.js"></script>
+    <script src="./config.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

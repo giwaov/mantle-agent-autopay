@@ -1,0 +1,19 @@
+{
+  "name": "mantle-agent-autopay",
+  "version": "1.0.0",
+  "description": "Recurring and milestone payments for AI agents on Mantle.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "forge build",
+    "test": "forge test -vv",
+    "verify": "forge build && forge test -vv && node mantle-agent-autopay.mjs help && node mantle-agent-autopay.mjs schedule --payer 0x0000000000000000000000000000000000000001 --agent 0x0000000000000000000000000000000000000002 --amount 1 --period-days 7 --payments 4",
+    "doctor": "node mantle-agent-autopay.mjs doctor",
+    "deploy": "node mantle-agent-autopay.mjs deploy --broadcast",
+    "demo:schedule": "node mantle-agent-autopay.mjs schedule --payer 0x0000000000000000000000000000000000000001 --agent 0x0000000000000000000000000000000000000002 --amount 1 --period-days 7 --payments 4 --metadata-uri ipfs://example",
+    "demo:milestone": "node mantle-agent-autopay.mjs milestone --payer 0x0000000000000000000000000000000000000001 --agent 0x0000000000000000000000000000000000000002 --amount 5 --work-hash 0x0000000000000000000000000000000000000000000000000000000000000000 --metadata-uri ipfs://example"
+  },
+  "dependencies": {
+    "ethers": "^6.16.0"
+  }
+}
