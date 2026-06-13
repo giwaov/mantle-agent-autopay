@@ -146,6 +146,7 @@ node mantle-agent-autopay.mjs deploy --broadcast
 | File | Purpose |
 | --- | --- |
 | `contracts/MantleAgentAutopay.sol` | Mainnet-ready autopay and milestone contract |
+| `abi/MantleAgentAutopay.abi.json` | Canonical contract ABI for frontend integrations |
 | `test/MantleAgentAutopay.t.sol` | Foundry tests |
 | `frontend/` | Static wallet app for judges and users |
 | `mantle-agent-autopay.mjs` | CLI for mainnet checks and transaction planning |
